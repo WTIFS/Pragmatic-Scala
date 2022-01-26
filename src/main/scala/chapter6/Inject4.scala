@@ -16,7 +16,9 @@
 
 package chapter6
 
-object Inject4 {
+object Inject4 extends App {
+  // 柯里化：把一个函数的多个参数，转为多个函数
+  // 如 inject(1,2,3) 改为 inject (1,2)(3)
   // #snip_6-14
   def inject(arr: Array[Int], initial: Int)(operation: (Int, Int) => Int): Int = {
     var carryOver = initial
@@ -25,14 +27,16 @@ object Inject4 {
   }
   // #snip_6-14
 
-  val array = Array(2, 3, 5, 1, 6, 4)
+  val array: Array[Int] = Array(2, 3, 5, 1, 6, 4)
 
   // #snip_6-15
   val sum: Int = inject(array, 0) { (carryOver, elem) =>
     carryOver + elem
   }
-  // #snip_6-15
-
   println(s"Sum of elements in array ${array.toString} is $sum")
 
+  // same as:
+  def sumFunc: (Int, Int) => Int = { (carryOver, elem) => carryOver + elem }
+  println(inject(array, 0)(sumFunc))
+  // #snip_6-15
 }

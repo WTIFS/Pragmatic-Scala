@@ -35,6 +35,5 @@ object Inject extends App {
   val max =
     inject(array, Integer.MIN_VALUE, (carry, elem) => Math.max(carry, elem))
   println(s"Max of elements in array is  $max")
-  // #snip_6-9
 
 }

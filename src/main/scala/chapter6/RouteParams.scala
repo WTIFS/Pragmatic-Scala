@@ -36,6 +36,7 @@ object RouteParams extends App {
     println(largest)
   }
 
+  // _不仅能表示单个参数，也能表示整个参数列表
   {
     // #snip_6-21
     val largest = (Integer.MIN_VALUE /: arr) { Math.max _ }

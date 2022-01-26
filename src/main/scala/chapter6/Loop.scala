@@ -27,16 +27,20 @@ object Loop extends App {
   }
   // #snip_6-2
 
+
+
   // #snip_6-3
   println(totalResultOverRange(11, i => i))
   // #snip_6-3
 
   // #snip_6-4
   println(totalResultOverRange(11, i => if (i % 2 == 0) i else 0))
+  // or use:
+  def filterEven(i: Int): Int = if (i % 2 != 0) i else 0
+  println(totalResultOverRange(11, filterEven))
   // #snip_6-4
 
   // #snip_6-5
   println(totalResultOverRange(11, i => if (i % 2 != 0) i else 0))
   // #snip_6-5
-
 }

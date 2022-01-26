@@ -18,6 +18,7 @@ package chapter6
 
 object Resource extends App {
   // #snip_6-33
+  // 把Resource类的构造器标记为private
   class Resource private () {
     println("Starting transaction...")
     private def cleanUp(): Unit = { println("Ending transaction...") }
