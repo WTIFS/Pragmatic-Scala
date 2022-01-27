@@ -19,12 +19,14 @@ package chapter7
 object MethodBinding extends App {
   // #snip_1
   abstract class Writer {
+    // 这个例子和上章的区别是，上章的 check 在抽象类里有实现，这里的 writeMessage 没有实现
     def writeMessage(message: String): Unit
   }
   // #snip_1
 
   // #snip_2
   trait UpperCaseWriter extends Writer {
+    // 因此 trait 里实现该方法时必须加上 abstract override
     abstract override def writeMessage(message: String): Unit =
       super.writeMessage(message.toUpperCase)
   }
@@ -45,15 +47,21 @@ object MethodBinding extends App {
   // #snip_3
 
   // #snip_4
+  val myWriterOriginal =
+    new StringWriterDelegate
+
   val myWriterProfanityFirst =
     new StringWriterDelegate with UpperCaseWriter with ProfanityFilteredWriter
 
   val myWriterProfanityLast =
     new StringWriterDelegate with ProfanityFilteredWriter with UpperCaseWriter
 
-  myWriterProfanityFirst.writeMessage("There is no sin except stupidity")
-  myWriterProfanityLast.writeMessage("There is no sin except stupidity")
+  val msg = "There is no sin except stupidity"
+  myWriterOriginal.writeMessage(msg)
+  myWriterProfanityFirst.writeMessage(msg)
+  myWriterProfanityLast.writeMessage(msg)
 
+  println(myWriterOriginal)
   println(myWriterProfanityFirst)
   println(myWriterProfanityLast)
   // #snip_4
